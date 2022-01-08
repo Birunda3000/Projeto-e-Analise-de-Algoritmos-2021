@@ -23,7 +23,7 @@ def print_3d(xx, x_label, yy, y_label, z, z_label,title):
     ax.set_zlabel(z_label)
 
     #xx, yy = np.meshgrid(range(10), range(10))
-    z = (9 - xx**3 - yy**2) / 2 
+    #z = (9 - xx**3 - yy**2) / 2 
 
     ax.plot_surface(xx, yy, z, alpha=0.5)
 
