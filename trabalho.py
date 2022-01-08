@@ -68,14 +68,12 @@ class formula:
                 t += 1
         return t
     
-    def SA(self, arq):
+    def SA(self):
 
         n_its1 = 40
         n_its2 = 1000
         T = 1000
         alpha = 0.09
-
-        self.read_txt(arq)
         self.initial_sol()
 
         current_cost = self.cont_trues(self.sol)
@@ -103,7 +101,8 @@ class formula:
 
 
 formu = formula()
-formu.SA('sat-1.txt')
+formu.read_txt('sat-1.txt')
+formu.SA()
 
 """
 TESTES QUE DERAM O RESULTADO:
