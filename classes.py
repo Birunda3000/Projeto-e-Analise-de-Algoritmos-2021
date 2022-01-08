@@ -44,36 +44,63 @@ class formula:
             x3 = literal(matrix[i][2], True)
             self.clausulas.append(clausula(i , [x1,x2,x3]))
         
+        self.valores = []
+        for i in range(self.n_variaveis):
+            self.valores.append(True)
+        
     def exibir_formula(self):
         for clausula in self.clausulas:
             print(clausula.literais[0].id, clausula.literais[1].id, clausula.literais[2].id)
+        print('------------------------------')
     def exibir_valores(self):
         for clausula in self.clausulas:
             print(clausula.literais[0].retornar_valor(), clausula.literais[1].retornar_valor(), clausula.literais[2].retornar_valor())
+        print('------------------------------')
     def atribuir_valores_iniciais(self):
-        for clausula in self.clausulas:
-            clausula.literais[0].valor = True if random.randint(0, 1) >= 1 else True
-            clausula.literais[1].valor = True if random.randint(0, 1) >= 1 else True
-            clausula.literais[2].valor = True if random.randint(0, 1) >= 1 else True
-    
+        for i in range (self.n_variaveis):
+            if random.randint(0, 1) >= 1:
+                self.valores[i] = True
+            else:
+                self.valores[i] = False
+            
+        self.atribuir_valores(self.valores)
+
     def conta_verdade(self):
         v = 0
-        print(len(self.clausulas))
+        #print(len(self.clausulas))
         for clausula in self.clausulas:
             if clausula.verificar_clausula():
-                print('Verdade',v)
+                #print('Verdade',v)
                 v+=1
             else:
-                print('Falso')
-
+                pass
+                #print('Falso')
         f = self.n_clausulas - v
         return v, f
+
     def atribuir_valores(self, vetor_valor):
+        self.valores = vetor_valor
         for clausula in self.clausulas:
-            
-            clausula.literais[0].valor = vetor_valor[clausula.literais[0].id]
-            clausula.literais[1].valor = vetor_valor[clausula.literais[1].id]
-            clausula.literais[2].valor = vetor_valor[clausula.literais[2].id]
+            clausula.literais[0].valor = vetor_valor[abs(clausula.literais[0].id)-1]
+            clausula.literais[1].valor = vetor_valor[abs(clausula.literais[1].id)-1]
+            clausula.literais[2].valor = vetor_valor[abs(clausula.literais[2].id)-1]
+#----------------------------------------------------------------------------
+
+
+def arrefecer(T, delta=0.99, i=1):
+    #return T * (delta - (i/i*delta))
+    return T * delta
+
+
+def simulated_annealing(formula, T_inicial):
+    T = T_inicial
+    formula.atribuir_valores_iniciais()
+
+
+
+
+
+
 
 '''formu = formula()
 formu.ler_arquivo('sat-0.txt')
