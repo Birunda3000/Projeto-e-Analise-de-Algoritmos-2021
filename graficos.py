@@ -1,23 +1,30 @@
+import numpy as np
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 
 
-T_inicial = 1
-alpha = 0.001
-passo_alpha = 0.01
-res = []
+def print_2d(x, x_label, y, y_label, title):
+    plt.plot(x, y)
+    plt.xlabel(x_label)
+    plt.ylabel(y_label)
+    plt.title(title)
+    plt.grid(color = 'g', linestyle=':', linewidth=.3)
+    plt.show()
 
-for T in range(0, 100):
-    for alpha in range(0, 100):
-        res.append([T, alpha/100, T*((alpha/100)+1)])
-        print(T)
+def print_3d(xx, x_label, yy, y_label, z, z_label,title):
 
+    fig = plt.figure()
 
-for i in range(len(res)):
-    print(res[i])
-'''plt.plot(xteste, xteste/2)
-plt.xlabel('X')
-plt.ylabel('Y')
-plt.title(r'Linear Regression')
-plt.grid(color = 'g', linestyle=':', linewidth=.3)
-#plt.savefig('./life_expect_x_years.png', dpi = 300)
-plt.show()'''
+    ax = fig.add_subplot(111,projection='3d')
+
+    ax.set_title(title)
+    ax.set_xlabel(x_label)
+    ax.set_ylabel(y_label)
+    ax.set_zlabel(z_label)
+
+    #xx, yy = np.meshgrid(range(10), range(10))
+    z = (9 - xx**3 - yy**2) / 2 
+
+    ax.plot_surface(xx, yy, z, alpha=0.5)
+
+    plt.show()
