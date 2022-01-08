@@ -96,9 +96,21 @@ def arrefecer(T, delta=0.99, i=1):
 def simulated_annealing(formula, T_inicial, max_ite):
     T = T_inicial
     formula.atribuir_valores_iniciais()
+    aux = formula
     valor_atual = formula.conta_verdade()
     for i in range (max_ite):
-        nova_sol =
+        aux.atribuir_valores(nova_sol(formula.valores))
+        novo_valor = aux.conta_verdade()
+        delta = novo_valor - valor_atual
+
+        if(delta >= 0):
+            sol_atual = sol_nova
+            val_atual = novo_val
+        elif(math.exp(delta/T) > random.random()):
+            sol_atual = sol_nova
+            val_atual = novo_val
+        T = arrefecer(T)
+
 ''' 
 #---------------------------------------------------------------------------
 
