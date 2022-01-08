@@ -86,15 +86,21 @@ class formula:
             clausula.literais[2].valor = vetor_valor[abs(clausula.literais[2].id)-1]
 #----------------------------------------------------------------------------
 
-
+#----------------------------------------------------------------------------
+'''
 def arrefecer(T, delta=0.99, i=1):
     #return T * (delta - (i/i*delta))
     return T * delta
 
 
-def simulated_annealing(formula, T_inicial):
+def simulated_annealing(formula, T_inicial, max_ite):
     T = T_inicial
     formula.atribuir_valores_iniciais()
+    valor_atual = formula.conta_verdade()
+    for i in range (max_ite):
+        nova_sol =
+''' 
+#---------------------------------------------------------------------------
 
 
 
