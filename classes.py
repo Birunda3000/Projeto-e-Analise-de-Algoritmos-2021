@@ -21,6 +21,7 @@ class formula:
         self.clausulas = []
         self.n_variaveis = 0
         self.n_clausulas = 0
+        self.valores = []
     def ler_arquivo(self, nome):
         matrix = []
         aux = []
@@ -49,7 +50,7 @@ class formula:
     def exibir_valores(self):
         for clausula in self.clausulas:
             print(clausula.literais[0].retornar_valor(), clausula.literais[1].retornar_valor(), clausula.literais[2].retornar_valor())
-    def atribuir_valores(self):
+    def atribuir_valores_iniciais(self):
         for clausula in self.clausulas:
             clausula.literais[0].valor = True if random.randint(0, 1) >= 1 else True
             clausula.literais[1].valor = True if random.randint(0, 1) >= 1 else True
@@ -67,3 +68,17 @@ class formula:
 
         f = self.n_clausulas - v
         return v, f
+    def atribuir_valores(self, vetor_valor):
+        for clausula in self.clausulas:
+            
+            clausula.literais[0].valor = vetor_valor[clausula.literais[0].id]
+            clausula.literais[1].valor = vetor_valor[clausula.literais[1].id]
+            clausula.literais[2].valor = vetor_valor[clausula.literais[2].id]
+
+'''formu = formula()
+formu.ler_arquivo('sat-0.txt')
+formu.atribuir_valores_iniciais()
+formu.exibir_formula()
+formu.exibir_valores()
+v, f = formu.conta_verdade()
+print('Verdade - ', v, ' | Falso - ', f)'''
