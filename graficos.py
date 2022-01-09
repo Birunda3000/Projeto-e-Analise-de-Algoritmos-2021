@@ -11,7 +11,7 @@ def print_2d(x, x_label, y, y_label, title):
     plt.grid(color = 'g', linestyle=':', linewidth=.3)
     plt.show()
 
-def print_3d(xx, x_label, yy, y_label, z, z_label,title):
+def print_3d(xx, x_label, yy, y_label, z, z_label, title):
 
     fig = plt.figure()
 
