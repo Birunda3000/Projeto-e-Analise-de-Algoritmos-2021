@@ -2,8 +2,7 @@ import random
 import math
 import numpy as np
 import pickle
-
-from numpy.lib.npyio import save
+from tqdm import tqdm
 
 class literal:
     def __init__(self, id):
@@ -84,7 +83,6 @@ class formula:
         for _ in range(1, n_its1):
 
             for j in range(n_its2):
-                print(T, self.cont_trues(self.sol))
 
                 new_sol = self.modify_sol_rand(j%2)
                 new_cost = self.cont_trues(new_sol)
@@ -97,7 +95,7 @@ class formula:
 
 
             T = T * alpha
-            if T < 0.005: break
+            if T < 0.01: break
 
         return self.cont_trues(self.sol)
 
@@ -107,7 +105,7 @@ class formula:
         alpha = []
         result = []
 
-        for T in range(1, 1000):
+        for T in tqdm(range(1, 1000)):
 
             T_aux = []
             alpha_aux = []
@@ -129,9 +127,10 @@ class formula:
             alpha.append(alpha_aux)
             result.append(result_aux)
 
-            self.save_data("T_matrix", T)
-            self.save_data("alpha_matrix", alpha)
-            self.save_data("result_matrix", result)
+        
+        self.save_data("T_matrix", T)
+        self.save_data("alpha_matrix", alpha)
+        self.save_data("result_matrix", result)
 
 
     def save_data(self, save_name, data):
