@@ -2,7 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
-
 def print_2d(x, x_label, y, y_label, title, save=False, show=False, path=''):
     plt.plot(x, y)
     plt.xlabel(x_label)
@@ -13,7 +12,6 @@ def print_2d(x, x_label, y, y_label, title, save=False, show=False, path=''):
         plt.show()
     if save:
         plt.savefig(path, dpi=300)
-
 
 def print_3d(xx, x_label, yy, y_label, z, z_label, title, save=False, show=False, path=''):
 
