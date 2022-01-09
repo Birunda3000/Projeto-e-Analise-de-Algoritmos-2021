@@ -1,5 +1,9 @@
 import random
 import math
+import numpy as np
+import pickle
+
+from numpy.lib.npyio import save
 
 class literal:
     def __init__(self, id):
@@ -68,12 +72,11 @@ class formula:
                 t += 1
         return t
     
-    def SA(self):
+    def SA(self, T, alpha):
 
-        n_its1 = 40
+        n_its1 = 1000
         n_its2 = 1000
-        T = 1000
-        alpha = 0.09
+
         self.initial_sol()
 
         current_cost = self.cont_trues(self.sol)
@@ -96,13 +99,57 @@ class formula:
             T = T * alpha
             if T < 0.005: break
 
-        print(self.cont_trues(self.sol))
-        print(self.sol)
+        return self.cont_trues(self.sol)
+
+    def testes(self):
+
+        T = []
+        alpha = []
+        result = []
+
+        for T in range(1, 1000):
+
+            T_aux = []
+            alpha_aux = []
+            result_aux = []
+
+            for alpha in np.arange(0.001, 0.999, 0.001):
+
+                max_result = 0
+
+                for _ in range(3):
+                    result = self.SA(T, alpha)
+                    if result > max_result : max_result = result
+                
+                T_aux.append(T)
+                alpha_aux.append(alpha)
+                result_aux.append(max_result)
+
+            T.append(T_aux)
+            alpha.append(alpha_aux)
+            result.append(result_aux)
+
+            self.save_data("T_matrix", T)
+            self.save_data("alpha_matrix", alpha)
+            self.save_data("result_matrix", result)
+
+
+    def save_data(self, save_name, data):
+        pickle_out = open(save_name+"-pickle.pickle","wb")
+        print('Arquivo gravado como: '+save_name+"-pickle.pickle")
+        pickle.dump(data, pickle_out)
+        pickle_out.close()
+        
+    
+
+        
+
+
 
 
 formu = formula()
 formu.read_txt('sat-1.txt')
-formu.SA()
+formu.testes()
 
 """
 TESTES QUE DERAM O RESULTADO:
