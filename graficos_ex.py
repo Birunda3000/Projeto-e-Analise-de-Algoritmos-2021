@@ -9,9 +9,9 @@ MAX =  (alpha*10)**2
 alpha2, T2 = np.meshgrid(range(10), range(10))
 MAX2 = (alpha2**3 + T2**2 - 30) / 2 
 
-graficos.print_2d(alpha, 'alpha', MAX, 'Max', 'SA')
+graficos.print_2d(alpha, 'alpha', MAX, 'Max', 'SA', show=True, save=False)
 
-graficos.print_3d(alpha2, 'alpha', T2, 'T', MAX2, 'MAX', 'SA')
+graficos.print_3d(alpha2, 'alpha', T2, 'T', MAX2, 'MAX', 'SA', show=True, save=False)
 
 print('Alpha', alpha2)
 print()
