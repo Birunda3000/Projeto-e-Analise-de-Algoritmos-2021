@@ -74,8 +74,8 @@ class formula:
     
     def SA(self, T, alpha):
 
-        n_its1 = 1000
-        n_its2 = 1000
+        n_its1 = 10000-T*5
+        n_its2 = 100
 
         self.initial_sol()
 
@@ -106,26 +106,26 @@ class formula:
         alpha_vet = []
         result_vet = []
 
-        for T in tqdm(range(1, 1000)):
+        for T in tqdm(range(500, 1000)):
 
             T_aux = []
             alpha_aux = []
             result_aux = []
 
-            for alpha in np.arange(0.001, 0.999, 0.1):
+            for alpha in np.arange(0.01, 0.99, 0.01):
 
                 max_result = 0
 
-                for _ in range(3):
+                for _ in range(5):
                     result = self.SA(T, alpha)
                     if result > max_result : max_result = result
                 
                 T_aux.append(T)
                 alpha_aux.append(alpha)
                 result_aux.append(max_result)
-                print('.',end='')#-----------------
+                #print('.',end='')#-----------------
 
-            print()#---------
+            #print()#---------
             T_vet.append(T_aux)
             alpha_vet.append(alpha_aux)
             result_vet.append(result_aux)
