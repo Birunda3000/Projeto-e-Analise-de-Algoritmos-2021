@@ -27,7 +27,7 @@ def print_3d(xx, x_label, yy, y_label, z, z_label, title, save=False, show=False
     #xx, yy = np.meshgrid(range(10), range(10))
     #z = (9 - xx**3 - yy**2) / 2 
 
-    ax.plot_surface(xx, yy, z, alpha=0.5)
+    ax.plot_surface(xx, yy, z, alpha=0.8)
     if show:
         plt.show()
     if save:

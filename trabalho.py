@@ -2,7 +2,6 @@ import random
 import math
 import numpy as np
 import pickle
-from teste import T_vet
 from tqdm import tqdm
 
 class literal:
@@ -75,7 +74,7 @@ class formula:
     def SA(self, T, alpha):
 
         n_its1 = 1000
-        n_its2 = 1000
+        n_its2 = 100
 
         self.initial_sol()
 
@@ -90,13 +89,18 @@ class formula:
 
                 delta = new_cost - current_cost
 
-                if(random.random() < math.exp(delta/T)):
+                aux = delta/T
+                
+                if aux > 700: aux = 700
+                if aux < -700: aux = -700
+
+                if(random.random() < math.exp(aux)):
                     self.sol = new_sol.copy()
                     current_cost = self.cont_trues(self.sol)
 
 
             T = T * alpha
-            if T < 0.01: break
+            if T < 0.0001: break
 
         return self.cont_trues(self.sol)
 
@@ -106,13 +110,13 @@ class formula:
         alpha_vet = []
         result_vet = []
 
-        for T in tqdm(range(1, 1000)):
+        for T in tqdm(range(100, 1000, 100)):
 
             T_aux = []
             alpha_aux = []
             result_aux = []
 
-            for alpha in np.arange(0.001, 0.999, 0.1):
+            for alpha in tqdm(np.arange(0.1, 0.9, 0.1)):
 
                 max_result = 0
 
@@ -123,22 +127,20 @@ class formula:
                 T_aux.append(T)
                 alpha_aux.append(alpha)
                 result_aux.append(max_result)
-                print('.',end='')#-----------------
 
-            print()#---------
             T_vet.append(T_aux)
             alpha_vet.append(alpha_aux)
             result_vet.append(result_aux)
 
         
-        self.save_data("T_matrix", T_vet)
-        self.save_data("alpha_matrix", alpha_vet)
-        self.save_data("result_matrix", result_vet)
+        self.save_data("T_matrix3", T_vet)
+        self.save_data("alpha_matrix3", alpha_vet)
+        self.save_data("result_matrix3", result_vet)
 
 
     def save_data(self, save_name, data):
-        pickle_out = open(save_name+"-pickle.pickle","wb")
-        print('Arquivo gravado como: '+save_name+"-pickle.pickle")
+        pickle_out = open(save_name+".pickle","wb")
+        print('Arquivo gravado como: '+save_name+".pickle")
         pickle.dump(data, pickle_out)
         pickle_out.close()
         
@@ -150,7 +152,7 @@ class formula:
 
 
 formu = formula()
-formu.read_txt('sat-1.txt')
+formu.read_txt('sat-3.txt')
 formu.testes()
 
 """
