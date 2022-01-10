@@ -2,6 +2,7 @@ import random
 import math
 import numpy as np
 import pickle
+from teste import T_vet
 from tqdm import tqdm
 
 class literal:
@@ -101,9 +102,9 @@ class formula:
 
     def testes(self):
 
-        T = []
-        alpha = []
-        result = []
+        T_vet = []
+        alpha_vet = []
+        result_vet = []
 
         for T in tqdm(range(1, 1000)):
 
@@ -111,7 +112,7 @@ class formula:
             alpha_aux = []
             result_aux = []
 
-            for alpha in np.arange(0.001, 0.999, 0.01):
+            for alpha in np.arange(0.001, 0.999, 0.1):
 
                 max_result = 0
 
@@ -125,14 +126,14 @@ class formula:
                 print('.',end='')#-----------------
 
             print()#---------
-            T.append(T_aux)
-            alpha.append(alpha_aux)
-            result.append(result_aux)
+            T_vet.append(T_aux)
+            alpha_vet.append(alpha_aux)
+            result_vet.append(result_aux)
 
         
-        self.save_data("T_matrix", T)
-        self.save_data("alpha_matrix", alpha)
-        self.save_data("result_matrix", result)
+        self.save_data("T_matrix", T_vet)
+        self.save_data("alpha_matrix", alpha_vet)
+        self.save_data("result_matrix", result_vet)
 
 
     def save_data(self, save_name, data):

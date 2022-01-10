@@ -9,9 +9,9 @@ MAX =  (alpha*10)**2
 
 alpha2, T2 = np.meshgrid(range(3), np.arange(0.001, 0.300, 0.01))
 
-print(alpha2)
+#print(alpha2)
 
-print(T2)
+#print(T2)
 
 T_vet = []
 T_aux = []
