@@ -122,7 +122,9 @@ class formula:
                 T_aux.append(T)
                 alpha_aux.append(alpha)
                 result_aux.append(max_result)
+                print('.',end='')#-----------------
 
+            print()#---------
             T.append(T_aux)
             alpha.append(alpha_aux)
             result.append(result_aux)
