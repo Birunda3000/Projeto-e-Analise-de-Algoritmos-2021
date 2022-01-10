@@ -75,8 +75,10 @@ class formula:
     
     def SA(self, T, alpha):
 
-        n_its1 = 1000
-        n_its2 = 5
+        n_its1 = 3000
+        n_its2 = 30
+
+        his = []
 
         self.initial_sol()
 
@@ -94,55 +96,31 @@ class formula:
                 if(random.random() < math.exp(delta/T)):
                     self.sol = new_sol.copy()
                     current_cost = self.cont_trues(self.sol)
-
+                    his.append(current_cost)
 
             T = T * alpha
-            if T < 0.01: break
+            if T < 0.01:
+                #print('break') 
+                break
 
-        return self.cont_trues(self.sol)
+        return his
 
-    def testes(self):
-
-        T_vet = []
-        alpha_vet = []
-        result_vet = []
-        time_vet = []
-        time_aux = []
-
-        for T in tqdm(range(500, 1000)):
-            init_time = time()
-            T_aux = []
-            alpha_aux = []
-            result_aux = []
-            time_aux = []
-
-            for alpha in np.arange(0.01, 0.99, 0.01):
-
-                max_result = 0
-
-                for _ in range(3):
-                    result = self.SA(T, alpha)
-                    if result > max_result : max_result = result
-                
-                T_aux.append(T)
-                alpha_aux.append(alpha)
-                result_aux.append(max_result)
-                time_aux.append(time() - init_time)
-                print('.',end='')#-----------------
-
-            print()#---------
-            T_vet.append(T_aux)
-            alpha_vet.append(alpha_aux)
-            result_vet.append(result_aux)
-            time_vet.append(time_aux)
-
-
+    def testes(self, T_vet, Alpha_vet):
         
-        self.save_data("T_matrix", T_vet)
-        self.save_data("alpha_matrix", alpha_vet)
-        self.save_data("result_matrix", result_vet)
-        self.save_data("time", time_vet)
-
+        sair = False
+        while True:        
+            result = [ T_vet, Alpha_vet, self.SA(T_vet, Alpha_vet) ]
+        
+            #self.save_data("his-best-sat-1", result)
+            
+            for i in range(len(result[2])):
+                if result[2][i] >= 274:
+                    print('MAX - ',result[2][i]),
+                    sair = True
+            if sair:
+                self.save_data("his-best-sat-1", result)
+                break
+            print('.', end='')
 
     def save_data(self, save_name, data):
         pickle_out = open(save_name+"-pickle.pickle","wb")
@@ -151,40 +129,13 @@ class formula:
         pickle_out.close()
         
     
+#T =     [650,  640,  570] 
+#MAX =   [275,  275,  274]
+#Alpha = [0.96, 0.96, 0.96]
 
-        
-
-
-
+T = 570 
+Alpha = 0.96
 
 formu = formula()
 formu.read_txt('sat-1.txt')
-formu.testes()
-
-"""
-TESTES QUE DERAM O RESULTADO:
-
-272/275:
- n_iterations1 = 40
-        n_iterations2 = 1000
-        T = 1000
-        alpha = 0.09
-
-Chegou no 499:
-
-n_iterations1 = 15
-n_iterations2 = 400
-T = 600
-alpha = 0.35
-
-Valores q mais deram certo pro sat-3:
-
-n_iterations1 = 20
-n_iterations2 = 500
-T = 700
-alpha = 0.4
-
-if T < 0.005: break
-
-
-"""
+formu.testes(T , Alpha)

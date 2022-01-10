@@ -94,10 +94,13 @@ class formula:
                 if(random.random() < math.exp(delta/T)):
                     self.sol = new_sol.copy()
                     current_cost = self.cont_trues(self.sol)
+                    #his.append(current_cost)
 
 
             T = T * alpha
-            if T < 0.01: break
+            if T < 0.01:
+                #print('break') 
+                break
 
         return self.cont_trues(self.sol)
 
@@ -109,14 +112,14 @@ class formula:
         time_vet = []
         time_aux = []
 
-        for T in tqdm(range(500, 1000)):
+        for T in np.arange(1000, 500, -10):
             init_time = time()
             T_aux = []
             alpha_aux = []
             result_aux = []
             time_aux = []
 
-            for alpha in np.arange(0.01, 0.99, 0.01):
+            for alpha in np.arange(0.01, 0.99, 0.05):
 
                 max_result = 0
 
@@ -130,18 +133,18 @@ class formula:
                 time_aux.append(time() - init_time)
                 print('.',end='')#-----------------
 
-            print()#---------
-            T_vet.append(T_aux)
-            alpha_vet.append(alpha_aux)
-            result_vet.append(result_aux)
-            time_vet.append(time_aux)
+            print('---------------',T,'---------------', sum(time_aux))#---------
+            #T_vet.append(T_aux)
+            #alpha_vet.append(alpha_aux)
+            #result_vet.append(result_aux)
+            #time_vet.append(time_aux)
 
 
         
-        self.save_data("T_matrix", T_vet)
-        self.save_data("alpha_matrix", alpha_vet)
-        self.save_data("result_matrix", result_vet)
-        self.save_data("time", time_vet)
+        self.save_data("T_matrix-3", T_vet)
+        self.save_data("alpha_matrix-3", alpha_vet)
+        self.save_data("result_matrix-3", result_vet)
+        self.save_data("time-3", time_vet)
 
 
     def save_data(self, save_name, data):
@@ -158,7 +161,7 @@ class formula:
 
 
 formu = formula()
-formu.read_txt('sat-1.txt')
+formu.read_txt('sat-3.txt')
 formu.testes()
 
 """
