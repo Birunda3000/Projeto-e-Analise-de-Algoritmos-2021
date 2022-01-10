@@ -27,28 +27,3 @@ k = np.arange(0,      len(his[2])          , 1)
 #graficos.print_3d(alpha, 'alpha', T, 'T', res, 'MAX', 'SA', show=True, save=True, path='grafico_sat-1')
 
 graficos.print_2d(k, 'Epoch', his[2], 'Result', "SA_Best_SAT-1", save=False, show=True)
-
-for i in range(len(his[2])):
-    if his[2][i] > 270:
-        print('MAX - ',his[2][i]),
-        print()
-
-
-
-
-
-'''for i in range(len(res)):
-    for j in range(len(res[i])):
-        if res[i][j] > 273:
-            print('MAX - ',res[i][j])
-            print('T - ', T[i][j])
-            print('Alpha - ', alpha[i][j])
-            print('-----------------------')
-            print()'''
-
-
-#print('Alpha', alpha)
-#print()
-#print('T', T)
-#print()
-#print('MAX', res)

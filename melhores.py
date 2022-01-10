@@ -129,6 +129,7 @@ class formula:
         pickle_out.close()
         
     
+#SAT-1
 #T =     [650,  640,  570] 
 #MAX =   [275,  275,  274]
 #Alpha = [0.96, 0.96, 0.96]
