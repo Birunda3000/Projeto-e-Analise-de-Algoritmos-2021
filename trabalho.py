@@ -4,6 +4,7 @@ import numpy as np
 import pickle
 from teste import T_vet
 from tqdm import tqdm
+from time import time
 
 class literal:
     def __init__(self, id):
@@ -75,7 +76,7 @@ class formula:
     def SA(self, T, alpha):
 
         n_its1 = 10000-T*5
-        n_its2 = 100
+        n_its2 = 20
 
         self.initial_sol()
 
@@ -105,35 +106,42 @@ class formula:
         T_vet = []
         alpha_vet = []
         result_vet = []
+        time_vet = []
+        time_aux = []
 
         for T in tqdm(range(500, 1000)):
-
+            init_time = time()
             T_aux = []
             alpha_aux = []
             result_aux = []
+            time_aux = []
 
             for alpha in np.arange(0.01, 0.99, 0.01):
 
                 max_result = 0
 
-                for _ in range(5):
+                for _ in range(3):
                     result = self.SA(T, alpha)
                     if result > max_result : max_result = result
                 
                 T_aux.append(T)
                 alpha_aux.append(alpha)
                 result_aux.append(max_result)
+                time_aux.append(time() - init_time)
                 #print('.',end='')#-----------------
 
             #print()#---------
             T_vet.append(T_aux)
             alpha_vet.append(alpha_aux)
             result_vet.append(result_aux)
+            time_vet.append(time_aux)
+
 
         
         self.save_data("T_matrix", T_vet)
         self.save_data("alpha_matrix", alpha_vet)
         self.save_data("result_matrix", result_vet)
+        self.save_data("time", time_vet)
 
 
     def save_data(self, save_name, data):
