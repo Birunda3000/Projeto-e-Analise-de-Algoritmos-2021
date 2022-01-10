@@ -111,7 +111,7 @@ class formula:
             alpha_aux = []
             result_aux = []
 
-            for alpha in np.arange(0.001, 0.999, 0.001):
+            for alpha in np.arange(0.001, 0.999, 0.01):
 
                 max_result = 0
 
