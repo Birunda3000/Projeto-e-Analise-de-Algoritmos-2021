@@ -1,3 +1,4 @@
+#SA pesquisa T x alpha
 import random
 import math
 import numpy as np
@@ -131,5 +132,5 @@ class formula:
                 print('.',end='')#-----------------
 
 formu = formula()
-formu.read_txt('sat-3.txt')
+formu.read_txt('sat-1.txt')
 formu.testes()
