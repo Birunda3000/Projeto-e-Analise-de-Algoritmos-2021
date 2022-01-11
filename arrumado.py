@@ -75,18 +75,12 @@ class formula:
     
     def SA(self, T, alpha):
 
-        init_time = time()
-
-        n_its1 = 3000
-        n_its2 = 30
-
-        his = []
+        n_its1 = 1000
+        n_its2 = 5
 
         self.initial_sol()
 
         current_cost = self.cont_trues(self.sol)
-
-        #print(current_cost)
 
         for _ in range(1, n_its1):
 
@@ -100,55 +94,42 @@ class formula:
                 if(random.random() < math.exp(delta/T)):
                     self.sol = new_sol.copy()
                     current_cost = self.cont_trues(self.sol)
-                    his.append(current_cost)
 
             T = T * alpha
             if T < 0.01:
-                #print('break') 
                 break
-        #print('Tempo - ', time() - init_time)
 
-        return his
+        return self.cont_trues(self.sol)
 
-    def testes(self, T_vet, Alpha_vet):
-        
-        sair = False
-        while True:        
-            result = [ T_vet, Alpha_vet, self.SA(T_vet, Alpha_vet) ]
-        
-            #self.save_data("his-best-sat-1", result)
-            
-            for i in range(len(result[2])):
-                if result[2][i] >= 499:
-                    print('MAX - ',result[2][i]),
-                    sair = True
-            if sair:
-                self.save_data("his-best-sat-2", result)
-                break
-            print('.', end='')
+    def testes(self):
 
-    def save_data(self, save_name, data):
-        pickle_out = open(save_name+"-pickle.pickle","wb")
-        print('Arquivo gravado como: '+save_name+"-pickle.pickle")
-        pickle.dump(data, pickle_out)
-        pickle_out.close()
-        
-    
-#SAT-1
-#T =     [650,  640,  570] 
-#MAX =   [275,  275,  274]
-#Alpha = [0.96, 0.96, 0.96]
+        T_vet = []
+        alpha_vet = []
+        result_vet = []
+        time_vet = []
+        time_aux = []
 
-#SAT-2
-#T =     [808,  785,  730] 
-#MAX =   [494,  496,  494]
-#Alpha = [0.96, 0.96, 0.96]
+        for T in np.arange(1000, 500, -10):
+            init_time = time()
+            T_aux = []
+            alpha_aux = []
+            result_aux = []
+            time_aux = []
 
+            for alpha in np.arange(0.01, 0.99, 0.05):
 
+                max_result = 0
 
-T = 785
-Alpha = 0.96
+                for _ in range(3):
+                    result = self.SA(T, alpha)
+                    if result > max_result : max_result = result
+                
+                T_aux.append(T)
+                alpha_aux.append(alpha)
+                result_aux.append(max_result)
+                time_aux.append(time() - init_time)
+                print('.',end='')#-----------------
 
 formu = formula()
-formu.read_txt('sat-2.txt')
-formu.testes(T , Alpha)
+formu.read_txt('sat-3.txt')
+formu.testes()

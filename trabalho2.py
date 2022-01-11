@@ -52,7 +52,6 @@ class formula:
             self.clauses.append(clause(i , [x1,x2,x3]))
   
     def initial_sol(self):
-        
         for _ in range(self.n_literals):
             self.sol.append(random.randint(0,1))
 
@@ -76,6 +75,8 @@ class formula:
     
     def SA(self, T, alpha):
 
+        
+        
         n_its1 = 1000
         n_its2 = 5
 
