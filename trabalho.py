@@ -155,6 +155,20 @@ formu = formula()
 formu.read_txt('sat-3.txt')
 formu.testes()
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 """
 TESTES QUE DERAM O RESULTADO:
 

@@ -135,7 +135,7 @@ class formula:
                 time_aux.append(time() - init_time)
                 print('.',end='')#-----------------
 
-            print('---------------',T,'---------------', sum(time_aux))#---------
+            #print('---------------',T,'---------------', sum(time_aux))#---------
             #T_vet.append(T_aux)
             #alpha_vet.append(alpha_aux)
             #result_vet.append(result_aux)
@@ -159,12 +159,17 @@ class formula:
 
         
 
-
-
-
 formu = formula()
 formu.read_txt('sat-3.txt')
 formu.testes()
+
+
+
+
+
+
+
+
 
 """
 TESTES QUE DERAM O RESULTADO:
