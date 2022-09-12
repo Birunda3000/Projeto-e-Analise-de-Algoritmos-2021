@@ -1,3 +1,4 @@
-# PAA-2021-Simulated-Annealing
- Repositorio trabalho final PAA 2021
- * Se delta maior que 0 nova > anterior logo se aceita pois a função probabilidade é maior que 1
+# Projeto-e-Analise-de-Algoritmos
+Cadeira de Graduação Projeto e Análise de Algoritmos 2021.1
+
+Questões da segunda avaliação - parte I
